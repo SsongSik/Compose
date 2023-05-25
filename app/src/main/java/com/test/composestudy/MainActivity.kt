@@ -47,7 +47,7 @@ fun ButtonExample(onButtonClicked : () -> Unit) {
         enabled = true,
         border = BorderStroke(10.dp, Color.Magenta),
         shape = CircleShape,
-        contentPadding = PaddingValues(30.dp)
+        contentPadding = PaddingValues(50.dp)
     ) {
         Icon(
             imageVector = Icons.Filled.Send,
