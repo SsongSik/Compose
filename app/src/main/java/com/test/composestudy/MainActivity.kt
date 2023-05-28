@@ -12,6 +12,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
@@ -38,9 +40,51 @@ class MainActivity : ComponentActivity() {
 //                })
 //                ModifierEx()
 //                Greeting2("World!")
-                BoxEx()
+//                BoxEx()
+//                RowEx()
             }
         }
+    }
+}
+
+@Composable
+fun RowEx() {
+    Row(
+        modifier = Modifier
+            .height(40.dp)
+            .width(200.dp),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.SpaceBetween //Row 는 수평으로 가기 때문에 수평방향이 기준
+    ) {
+        Text(
+            text = "첫 번째!",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .align(Alignment.Top)
+                .weight(3f) //비중
+                .background(Color.Magenta)
+        )
+        Icon(
+            imageVector = Icons.Filled.AccountBox,
+            contentDescription = "추가",
+            modifier = Modifier
+                .weight(1f)
+                .background(Color.Cyan)
+        )
+//        Text(
+//            text = "두 번째!",
+//            modifier = Modifier
+//                .weight(1f)
+////            modifier = Modifier.align(Alignment.CenterVertically)
+//        )
+        Text(
+            text = "세 번째!",
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .weight(3f)
+                .background(Color.Blue)
+//            modifier = Modifier.align(Alignment.Bottom)
+        )
     }
 }
 
@@ -179,6 +223,7 @@ fun DefaultPreview() {
 //        ButtonExample(onButtonClicked = { })
 //        ModifierEx()
 //        Greeting2("World")
-        BoxEx()
+//        BoxEx()
+        RowEx()
     }
 }
