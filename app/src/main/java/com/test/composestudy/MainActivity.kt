@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -13,10 +14,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,9 +42,62 @@ class MainActivity : ComponentActivity() {
 //                Greeting2("World!")
 //                BoxEx()
 //                RowEx()
-                ColumnEx()
+//                ColumnEx()
+//                Outer()
+                Greeting3()
             }
         }
+    }
+}
+
+@Composable
+fun Greeting3() {
+    Column {
+        Image(
+            painter = painterResource(id = R.drawable.image),
+            contentDescription = "이미지"
+        )
+        Image(
+            imageVector = Icons.Filled.Settings,
+            contentDescription = "세팅"
+        )
+//        Image( -> context 주입 필요
+//            bitmap = ,
+//            contentDescription = "이미지 비트맵"
+//        )
+    }
+}
+
+@Composable
+fun Outer() {
+    Column(
+        modifier = Modifier.width(150.dp)
+    ){
+        Inner(modifier = Modifier
+            .widthIn(min = 100.dp, max = 350.dp)
+            .heightIn(min = 50.dp, max = 160.dp)
+            .height(160.dp)
+        )
+        Inner(modifier = Modifier
+            .widthIn(min = 100.dp, max = 350.dp)
+            .heightIn(min = 50.dp, max = 160.dp)
+            .height(100.dp)
+        )
+    }
+}
+
+@Composable
+private fun Inner(modifier : Modifier = Modifier) {
+    BoxWithConstraints(
+        modifier
+    ) {
+        if(maxHeight > 150.dp) {
+            Text(
+                text = "여기 꽤 길군요!",
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+        }
+        Text(text = "max : $maxWidth maxH : $maxHeight minW : $minWidth minH : $minHeight")
     }
 }
 
@@ -247,6 +303,10 @@ fun DefaultPreview() {
 //        Greeting2("World")
 //        BoxEx()
 //        RowEx()
-        ColumnEx()
+//        ColumnEx()
+//        BoxWithConstraints() {
+//            Outer()
+//        }
+        Greeting3()
     }
 }
