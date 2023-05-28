@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -34,11 +35,32 @@ class MainActivity : ComponentActivity() {
 //                ButtonExample(onButtonClicked = {
 //                    Toast.makeText(this, "Send Clicked.", Toast.LENGTH_SHORT).show()
 //                })
-                ModifierEx()
+//                ModifierEx()
+                Greeting2("World!")
             }
         }
     }
 }
+
+@Composable
+fun Greeting2(name : String) {
+    Surface(
+        color = MaterialTheme.colors.secondary, //secondary 에 맞는 onSecondary 색상이 자연스레 content Color로 설정됨
+        modifier = Modifier.padding(10.dp), //Text 의 Margin 을 주기 위함
+        elevation = 5.dp,
+        border = BorderStroke(
+            width = 2.dp,
+            color = Color.Magenta
+        ),
+        shape = RoundedCornerShape(10.dp),
+    ) {
+        Text(
+            text = "Hello $name",
+            modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
 
 @Composable
 fun ModifierEx() {
@@ -121,6 +143,7 @@ fun DefaultPreview() {
     ComposestudyTheme {
 //        Greeting("Android")
 //        ButtonExample(onButtonClicked = { })
-        ModifierEx()
+//        ModifierEx()
+        Greeting2("World")
     }
 }
