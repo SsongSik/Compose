@@ -1,19 +1,16 @@
 package com.test.composestudy
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
@@ -42,8 +39,33 @@ class MainActivity : ComponentActivity() {
 //                Greeting2("World!")
 //                BoxEx()
 //                RowEx()
+                ColumnEx()
             }
         }
+    }
+}
+
+@Composable
+fun ColumnEx() {
+    /*
+    Alignment 는 진행방향과 수직으로
+    Arrangement 는 진행방향으로
+     */
+    Column( //horizontal 하게만 align 할 수 있음, row 는 vertical 하게만 alignment 할 수 있음, box 는 자유
+        modifier = Modifier.size(100.dp),
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.Center
+    ) {
+        //ColumnScope 에만 맞는 alignment 를 사용해야함
+        Text(
+            text = "첫 번째",
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Text(text = "두 번째")
+        Text(
+            text = "세 번째",
+            modifier = Modifier.align(Alignment.Start)
+        )
     }
 }
 
@@ -54,7 +76,7 @@ fun RowEx() {
             .height(40.dp)
             .width(200.dp),
         verticalAlignment = Alignment.Bottom,
-        horizontalArrangement = Arrangement.SpaceBetween //Row 는 수평으로 가기 때문에 수평방향이 기준
+        horizontalArrangement = Arrangement.SpaceBetween, //Row 는 수평으로 가기 때문에 수평방향이 기준
     ) {
         Text(
             text = "첫 번째!",
@@ -224,6 +246,7 @@ fun DefaultPreview() {
 //        ModifierEx()
 //        Greeting2("World")
 //        BoxEx()
-        RowEx()
+//        RowEx()
+        ColumnEx()
     }
 }
