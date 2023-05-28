@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -36,9 +37,42 @@ class MainActivity : ComponentActivity() {
 //                    Toast.makeText(this, "Send Clicked.", Toast.LENGTH_SHORT).show()
 //                })
 //                ModifierEx()
-                Greeting2("World!")
+//                Greeting2("World!")
+                BoxEx()
             }
         }
+    }
+}
+
+@Composable
+fun BoxEx() {
+    // FrameLayout
+    Box(
+//        modifier = Modifier.size(100.dp)
+    ) {
+//        Text(
+//            text = "Hello World",
+//            modifier = Modifier.align(Alignment.BottomEnd) //align BoxScope 안에서만 사용 가능
+//        )
+//        Text(
+//            text = "Jetpack",
+//            modifier = Modifier.align(Alignment.CenterEnd)
+//        )
+//        Text(
+//            text = "Compose",
+//            modifier = Modifier.align(Alignment.TopStart)
+//        )
+        Box(modifier = Modifier
+            .fillMaxSize()
+//            .matchParentSize() //부모의 사이즈. 두 번째 자식을 보고 결정됨
+            .background(color = Color.Cyan)
+            .align(Alignment.CenterStart)
+        )
+        Box(modifier = Modifier
+            .size(70.dp)
+            .background(color = Color.Yellow)
+            .align(Alignment.Center)
+        )
     }
 }
 
@@ -144,6 +178,7 @@ fun DefaultPreview() {
 //        Greeting("Android")
 //        ButtonExample(onButtonClicked = { })
 //        ModifierEx()
-        Greeting2("World")
+//        Greeting2("World")
+        BoxEx()
     }
 }
