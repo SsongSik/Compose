@@ -27,6 +27,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.compose.rememberImagePainter
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,9 +46,31 @@ class MainActivity : ComponentActivity() {
 //                RowEx()
 //                ColumnEx()
 //                Outer()
-                Greeting3()
+//                Greeting3()
+                CoilEx()
             }
         }
+    }
+}
+
+@Composable
+fun CoilEx() {
+    //remember 뒤 내용들을 저장했다가 리컴포지션이 될 때 기억하기 위함
+//    val painter = rememberImagePainter(data = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part1-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg")
+//    Image(
+//        painter = painter,
+//        contentDescription = "캐년"
+//    )
+
+    Column{
+        AsyncImage(
+            model = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part1-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg",
+            contentDescription = "캐년"
+        )
+        AsyncImage(
+            model = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part1-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg",
+            contentDescription = "캐년"
+        )
     }
 }
 
@@ -307,6 +331,7 @@ fun DefaultPreview() {
 //        BoxWithConstraints() {
 //            Outer()
 //        }
-        Greeting3()
+//        Greeting3()
+        CoilEx()
     }
 }
