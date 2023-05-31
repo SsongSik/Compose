@@ -1,11 +1,13 @@
 package com.test.composestudy
 
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +18,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,9 +51,65 @@ class MainActivity : ComponentActivity() {
 //                ColumnEx()
 //                Outer()
 //                Greeting3()
-                CoilEx()
+//                CoilEx()
+                CheckBoxEx()
             }
         }
+    }
+}
+
+//CheckBoxEx
+//CheckBoxEx2 composable func
+//setContent 두 개 모두 새로 그려질 수 있음
+//Composable 은 동시에 여러 곳에서 그려질 수 있음
+//mutableStateOf 와 remember 키워드를 같이
+@Composable
+fun CheckBoxEx() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        //mutableStateOf 를 바꾸어야함
+        //var checked = false
+
+        //destruction 비구조화, 반구조화
+//        val (a, b) = listOf(2, 3)
+
+//        var checked = remember{ mutableStateOf(false) }
+//        Checkbox(
+//            checked = checked.value, //상태를 바꾸어야함
+//            onCheckedChange = {
+//                checked.value = !checked.value
+//            }
+//        )
+//        Text(
+//            text = "프로그래머 입니까?"
+//        )
+
+        //위임된 속성
+//        var checked by remember { mutableStateOf (false) }
+//        Checkbox(
+//            checked = checked, //상태를 바꾸어야함
+//            onCheckedChange = {
+//                checked = !checked
+//            }
+//        )
+//        Text(
+//            text = "프로그래머 입니까?"
+//        )
+        val (getChecked, setChecked) = remember { mutableStateOf (false) }
+        Checkbox(
+            checked = getChecked, //상태를 바꾸어야함
+//            onCheckedChange = {
+//                setChecked(it)
+//            }
+            onCheckedChange = setChecked
+        )
+        Text(
+            text = "프로그래머 입니까?",
+            modifier = Modifier.clickable {
+                setChecked(!getChecked)
+            }
+        )
     }
 }
 
@@ -332,6 +392,6 @@ fun DefaultPreview() {
 //            Outer()
 //        }
 //        Greeting3()
-        CoilEx()
+//        CoilEx()
     }
 }
