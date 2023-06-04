@@ -17,9 +17,7 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,9 +50,35 @@ class MainActivity : ComponentActivity() {
 //                Outer()
 //                Greeting3()
 //                CoilEx()
-                CheckBoxEx()
+//                CheckBoxEx()
+                Greeting4()
             }
         }
+    }
+}
+
+@Composable
+fun Greeting4() {
+    var name by remember { mutableStateOf("Tom")}
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
+//        TextField(
+//            value = name,
+//            onValueChange = {name = it}
+//        )
+        OutlinedTextField(
+            value = name,
+            label = {
+                    Text(text = "이름")
+            },
+            onValueChange = {name = it}
+        )
+        Spacer(
+            modifier = Modifier.size(8.dp)
+        )
+
+        Text(text = "Hello $name")
     }
 }
 
@@ -393,5 +417,6 @@ fun DefaultPreview() {
 //        }
 //        Greeting3()
 //        CoilEx()
+        Greeting4()
     }
 }
