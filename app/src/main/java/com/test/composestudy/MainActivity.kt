@@ -13,10 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,9 +48,97 @@ class MainActivity : ComponentActivity() {
 //                Greeting3()
 //                CoilEx()
 //                CheckBoxEx()
-                Greeting4()
+//                Greeting4()
+                TopBarEx("Android")
             }
         }
+    }
+}
+
+@Composable
+fun TopBarEx(name : String) {
+    Column(
+
+    ) {
+        TopAppBar(
+            title = {
+                Text(text = "TopBarEx")
+            },
+            navigationIcon = {
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "앱 네비게이션"
+                    )
+                }
+            },
+            actions = {
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Favorite,
+                        contentDescription = "좋아요"
+                    )
+                }
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Settings,
+                        contentDescription = "설정"
+                    )
+                }
+                IconButton(
+                    onClick = { }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "검색"
+                    )
+                }
+            }
+        )
+
+        TopAppBar {
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "앱 네비게이션"
+                )
+            }
+            Text(text = "TopBarEx", modifier = Modifier.weight(1f))
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = "좋아요"
+                )
+            }
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Settings,
+                    contentDescription = "설정"
+                )
+            }
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "검색"
+                )
+            }
+        }
+
+        Text(text = "Hello $name")
     }
 }
 
