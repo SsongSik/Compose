@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -27,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -51,11 +52,90 @@ class MainActivity : ComponentActivity() {
 //                Greeting4()
 //                TopBarEx("Android")
 //                SlotEx()
-                ScaffoldEx()
+//                ScaffoldEx()
+                CatalogEx(items)
             }
         }
     }
 }
+
+@Composable
+fun Item(itemData: ItemData) {
+    Card(
+        elevation = 8.dp,
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = itemData.imageId),
+                contentDescription = itemData.title,
+            )
+            Spacer(
+                modifier = Modifier.size(8.dp)
+            )
+            Text(
+                text = itemData.title,
+                style = MaterialTheme.typography.h4
+            )
+            Spacer(
+                modifier = Modifier.size(8.dp)
+            )
+            Text(
+                text = itemData.description
+            )
+        }
+    }
+}
+
+@Composable
+fun CatalogEx(itemList: List<ItemData>) {
+    LazyColumn {
+        items(itemList.size) { item ->
+            Item(itemList[item])
+        }
+    }
+}
+
+data class ItemData(
+    @DrawableRes val imageId: Int,
+    val title: String,
+    val description: String,
+)
+
+val items = listOf(
+    ItemData(
+        imageId = R.drawable.image,
+        title = "해변 놀이 공원",
+        description = "해변 놀이 공원 설명입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+    ItemData(
+        imageId = R.drawable.image,
+        title = "캐년",
+        description = "미국의 캐년입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+    ItemData(
+        imageId = R.drawable.image,
+        title = "워터월드",
+        description = "워터월드입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+    ItemData(
+        imageId = R.drawable.image,
+        title = "미국의 캐년",
+        description = "미국의 캐년입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+    ItemData(
+        imageId = R.drawable.image,
+        title = "라스베가스",
+        description = "라스베가스입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+    ItemData(
+        imageId = R.drawable.image,
+        title = "호르슈 밴드",
+        description = "호르슈 밴드입니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    ),
+)
 
 @Composable
 fun CheckBoxWithContent(
@@ -101,7 +181,7 @@ fun ScaffoldEx() {
     },
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ }) {
-                
+
             }
         }
         ) {
@@ -605,6 +685,6 @@ fun DefaultPreview() {
 //        Greeting3()
 //        CoilEx()
 //        Greeting4()
-        ScaffoldEx()
+//        ScaffoldEx()
     }
 }
