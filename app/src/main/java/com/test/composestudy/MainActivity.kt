@@ -1,5 +1,6 @@
 package com.test.composestudy
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -49,11 +50,72 @@ class MainActivity : ComponentActivity() {
 //                CheckBoxEx()
 //                Greeting4()
 //                TopBarEx("Android")
-                SlotEx()
+//                SlotEx()
+                ScaffoldEx()
             }
         }
     }
 }
+
+@Composable
+fun CheckBoxWithContent(
+    checked: Boolean,
+    toggleState : () -> Unit,
+    content : @Composable () -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable{ toggleState() }
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = {
+                toggleState()
+            }
+        )
+        content()
+    }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun ScaffoldEx() {
+    var checked by remember { mutableStateOf(false) }
+
+    Scaffold(topBar = {
+        TopAppBar(
+            navigationIcon = {
+                 IconButton(
+                        onClick = { }
+                    ) {
+                        Image(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "뒤로 가기"
+                        )
+                    }
+            },
+            title = {
+                Text(text = "Scaffold App")
+            }
+        )
+    },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { /*TODO*/ }) {
+                
+            }
+        }
+        ) {
+        Surface(modifier = Modifier.padding(8.dp)) {
+            CheckBoxWithContent(
+                checked = checked,
+                toggleState = { checked = !checked }
+            ) {
+                Text(text = "컴포즈를 좋아합니다.")
+            }
+        }
+    }
+}
+
 @Composable
 fun CheckboxWithSlot(
     checked : Boolean,
@@ -542,6 +604,7 @@ fun DefaultPreview() {
 //        }
 //        Greeting3()
 //        CoilEx()
-        Greeting4()
+//        Greeting4()
+        ScaffoldEx()
     }
 }
