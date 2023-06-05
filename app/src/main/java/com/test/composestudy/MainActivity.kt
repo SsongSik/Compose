@@ -1,7 +1,6 @@
 package com.test.composestudy
 
 import android.os.Bundle
-import android.widget.CheckBox
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -49,8 +48,49 @@ class MainActivity : ComponentActivity() {
 //                CoilEx()
 //                CheckBoxEx()
 //                Greeting4()
-                TopBarEx("Android")
+//                TopBarEx("Android")
+                SlotEx()
             }
+        }
+    }
+}
+@Composable
+fun CheckboxWithSlot(
+    checked : Boolean,
+    onCheckedChanged : () -> Unit,
+    content : @Composable RowScope.() -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            onCheckedChanged()
+        }
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = {
+                onCheckedChanged()
+            }
+        )
+        content()
+    }
+}
+
+@Composable
+fun SlotEx() {
+    var checked1 by remember { mutableStateOf(false) }
+    var checked2 by remember { mutableStateOf(false) }
+
+    Column {
+        CheckboxWithSlot(checked = checked1, onCheckedChanged = {
+            checked1 = !checked1
+        }) {
+            Text("텍스트1")
+        }
+        CheckboxWithSlot(checked = checked2, onCheckedChanged = {
+            checked2 = !checked2
+        }) {
+            Text("텍스트2")
         }
     }
 }
