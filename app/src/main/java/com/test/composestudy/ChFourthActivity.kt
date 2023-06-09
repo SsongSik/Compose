@@ -7,11 +7,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.layoutId
@@ -23,9 +26,70 @@ class ChFourthActivity : ComponentActivity() {
         setContent {
             ComposestudyTheme {
 //                ConstraintLayoutEx()
-                ConstraintSetEx()
+//                ConstraintSetEx()
+                ConstraintLayoutEx2()
             }
         }
+    }
+}
+
+@Composable
+fun ConstraintLayoutEx2() {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        val (redBox, magentaBox, greenBox, text) = createRefs()
+
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Red)
+                .constrainAs(redBox) {
+                    top.linkTo(parent.top, margin = 18.dp)
+                }
+        ) {
+
+        }
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Magenta)
+                .constrainAs(magentaBox) {
+                    top.linkTo(parent.top, margin = 32.dp)
+                }
+        ) {
+
+        }
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color.Green)
+                .constrainAs(greenBox) {
+                    top.linkTo(parent.top, margin = 20.dp)
+                }
+        ) {
+
+        }
+
+        createVerticalChain(redBox, magentaBox, greenBox, chainStyle = ChainStyle.SpreadInside)
+        val barrier = createEndBarrier(redBox, magentaBox, greenBox)
+        Text(
+            text = "가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사",
+            modifier = Modifier
+                .width(100.dp)
+                .constrainAs(text) {
+                start.linkTo(barrier)
+                bottom.linkTo(magentaBox.bottom)
+            }
+        )
+//        createHorizontalChain(redBox, magentaBox, greenBox, chainStyle = ChainStyle.SpreadInside)
+//        val barrier = createBottomBarrier(redBox, magentaBox, greenBox)
+//        Text(
+//            text = "가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사",
+//            modifier = Modifier.constrainAs(text) {
+//                top.linkTo(barrier, margin = 20.dp)
+//            }
+//        )
     }
 }
 
@@ -158,6 +222,7 @@ fun ConstraintLayoutEx() {
 fun DefaultPreviewCh4() {
     ComposestudyTheme {
 //        ConstraintLayoutEx()
-        ConstraintSetEx()
+//        ConstraintSetEx()
+        ConstraintLayoutEx2()
     }
 }
