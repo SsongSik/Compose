@@ -4,20 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ChainStyle
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.layoutId
+import androidx.constraintlayout.compose.*
+import coil.compose.AsyncImage
+import com.test.composestudy.ProfileCardActivity.Companion.cardData
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class ChFourthActivity : ComponentActivity() {
@@ -27,7 +28,68 @@ class ChFourthActivity : ComponentActivity() {
             ComposestudyTheme {
 //                ConstraintLayoutEx()
 //                ConstraintSetEx()
-                ConstraintLayoutEx2()
+//                ConstraintLayoutEx2()
+                CardEx(cardData)
+            }
+        }
+    }
+}
+
+@Composable
+fun CardEx2(cardData: CardData) {
+    val placeHolderColor = Color(0x330000000)
+
+    Card(
+        elevation = 8.dp,
+        modifier = Modifier.padding(4.dp)
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            val (profileImage, author, description) = createRefs()
+            AsyncImage(
+                model = cardData.imageUrl,
+                contentScale = ContentScale.Crop,
+                contentDescription = cardData.imageDescription,
+                placeholder = ColorPainter(placeHolderColor),
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .constrainAs(profileImage) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start, margin = 8.dp)
+                    }
+            )
+
+            Text(
+                text = cardData.author,
+                modifier = Modifier.constrainAs(author) {
+                    linkTo(
+                        profileImage.end,
+                        parent.end,
+                        startMargin = 8.dp,
+                        endMargin = 8.dp)
+                    width = Dimension.fillToConstraints
+                }
+            )
+            Text(
+                text = cardData.description,
+                modifier = Modifier.constrainAs(description) {
+                    linkTo(
+                        profileImage.end,
+                        parent.end,
+                        startMargin = 8.dp,
+                        endMargin = 8.dp)
+                    width = Dimension.fillToConstraints
+                }
+            )
+
+            val chain = createVerticalChain(author, description, chainStyle = ChainStyle.Packed)
+            constrain(chain) {
+                top.linkTo(parent.top, margin = 8.dp)
+                bottom.linkTo(parent.bottom, margin = 8.dp)
             }
         }
     }
@@ -223,6 +285,7 @@ fun DefaultPreviewCh4() {
     ComposestudyTheme {
 //        ConstraintLayoutEx()
 //        ConstraintSetEx()
-        ConstraintLayoutEx2()
+//        ConstraintLayoutEx2()
+        CardEx2(ProfileCardActivity.cardData)
     }
 }
