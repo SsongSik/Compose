@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.*
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -42,8 +46,111 @@ class ChFourthActivity : ComponentActivity() {
 //                DropDownMenuEx()
 //                SnackbarEx()
 //                BottomAppBarEx()
-                PyeongToSquareMeterEx()
+//                PyeongToSquareMeterEx()
+                AnimationEx()
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AnimationEx() {
+    var helloWorldVisible by remember { mutableStateOf(true) }
+    var inRed by remember { mutableStateOf(false) }
+
+//    val backgroundColor = Color.LightGray
+    val state by animateColorAsState(
+        targetValue = if(inRed) Color.Red else Color.White
+    )
+
+    val alpha by animateFloatAsState(
+        targetValue = if(inRed) 1.0f else 0.5f
+    )
+
+    Column (
+        modifier = Modifier
+            .padding(16.dp)
+            .background(state)
+            .alpha(alpha)
+    ) {
+        AnimatedVisibility(
+            visible = helloWorldVisible,
+            enter = slideInHorizontally() + expandHorizontally() + fadeIn(),
+            exit = shrinkHorizontally() + fadeOut()
+        ) {
+            Text(text = "Hello World")
+        }
+
+        Row(
+            Modifier.selectable(
+                selected = helloWorldVisible,
+                onClick = {
+                    helloWorldVisible = true
+                }
+            ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = helloWorldVisible,
+                onClick = {helloWorldVisible = true}
+            )
+            Text(
+                text = "Hello World 보이기"
+            )
+        }
+        Row(
+            Modifier.selectable(
+                selected = !helloWorldVisible,
+                onClick = {
+                    helloWorldVisible = false
+                }
+            ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = !helloWorldVisible,
+                onClick = {helloWorldVisible = false}
+            )
+            Text(
+                text = "Hello World 감추기"
+            )
+        }
+
+        Text(text = "배경색을 바꾸어봅시다.")
+        Row(
+            Modifier.selectable(
+                selected = inRed,
+                onClick = {
+                    inRed = true
+                }
+            ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = inRed,
+                onClick = {inRed = true}
+            )
+            Text(
+                text = "빨간색"
+            )
+        }
+        Row(
+            Modifier.selectable(
+                selected = !inRed,
+                onClick = {
+                    inRed = false
+                }
+            ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = !inRed,
+                onClick = {inRed = false}
+            )
+            Text(
+                text = "흰색"
+            )
         }
     }
 }
@@ -657,6 +764,7 @@ fun DefaultPreviewCh4() {
 //        DropDownMenuEx()
 //        SnackbarEx()
 //        BottomAppBarEx()
-        PyeongToSquareMeterEx()
+//        PyeongToSquareMeterEx()
+        AnimationEx()
     }
 }
