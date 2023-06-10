@@ -2,6 +2,7 @@ package com.test.composestudy
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
@@ -25,10 +26,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.constraintlayout.compose.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import coil.compose.AsyncImage
 import com.test.composestudy.ui.theme.ComposestudyTheme
 import kotlinx.coroutines.launch
@@ -50,9 +55,54 @@ class ChFourthActivity : ComponentActivity() {
 //                BottomAppBarEx()
 //                PyeongToSquareMeterEx()
 //                AnimationEx()
-                AnimationEx2()
+//                AnimationEx2()
+                EffectEx()
             }
         }
+    }
+}
+
+@Composable
+fun EffectEx(
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
+) {
+    val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(scaffoldState.snackbarHostState) {
+        scaffoldState.snackbarHostState.showSnackbar("Hello Compose")
+    }
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when(event) {
+                Lifecycle.Event.ON_START -> {
+                    Log.d("이펙트", "ON_START")
+                }
+                Lifecycle.Event.ON_STOP -> {
+                    Log.d("이펙트", "ON_STOP")
+                }
+                Lifecycle.Event.ON_PAUSE -> {
+                    Log.d("이펙트", "ON_PAUSE")
+                }
+                Lifecycle.Event.ON_RESUME -> {
+                    Log.d("이펙트", "ON_RESUME")
+                }
+                else -> {
+                    Log.d("이펙트", "그 외")
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    Scaffold(
+        scaffoldState = scaffoldState
+    ) {
+
     }
 }
 
@@ -899,6 +949,7 @@ fun DefaultPreviewCh4() {
 //        BottomAppBarEx()
 //        PyeongToSquareMeterEx()
 //        AnimationEx()
-        AnimationEx2()
+//        AnimationEx2()
+        EffectEx()
     }
 }
