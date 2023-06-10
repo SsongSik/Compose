@@ -35,8 +35,48 @@ class ChFourthActivity : ComponentActivity() {
 //                CardEx(cardData)
 //                CanvasEx()
 //                DialogEx()
-                CustomDialogEx()
+//                CustomDialogEx()
+                DropDownMenuEx()
             }
+        }
+    }
+}
+
+@Composable
+fun DropDownMenuEx() {
+    var expandDropDownMenu by remember { mutableStateOf(false) }
+    var counter by remember { mutableStateOf(0) }
+
+    Column {
+        Button(
+            onClick = {expandDropDownMenu = true}
+        ) {
+            Text(text = "Show DropDownMenu")
+        }
+        Text(text = "Counter: $counter")
+    }
+
+    DropdownMenu(
+        expanded = expandDropDownMenu,
+        onDismissRequest = {
+            expandDropDownMenu = false
+        }
+    ) {
+        DropdownMenuItem(
+            onClick = {
+                counter++
+                expandDropDownMenu = false
+            }
+        ) {
+            Text(text = "더하기")
+        }
+        DropdownMenuItem(
+            onClick = {
+                counter--
+                expandDropDownMenu = false
+            }
+        ) {
+            Text(text = "빼기")
         }
     }
 }
@@ -423,6 +463,7 @@ fun DefaultPreviewCh4() {
 //        CardEx2(ProfileCardActivity.cardData)
 //        CanvasEx()
 //        DialogEx()
-        CustomDialogEx()
+//        CustomDialogEx()
+        DropDownMenuEx()
     }
 }
