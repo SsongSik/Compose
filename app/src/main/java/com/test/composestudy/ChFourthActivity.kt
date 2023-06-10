@@ -1,5 +1,6 @@
 package com.test.composestudy
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,6 +24,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.constraintlayout.compose.*
 import coil.compose.AsyncImage
 import com.test.composestudy.ui.theme.ComposestudyTheme
+import kotlinx.coroutines.launch
 
 class ChFourthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +38,50 @@ class ChFourthActivity : ComponentActivity() {
 //                CanvasEx()
 //                DialogEx()
 //                CustomDialogEx()
-                DropDownMenuEx()
+//                DropDownMenuEx()
+                SnackbarEx()
             }
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun SnackbarEx() {
+    var counter by remember { mutableStateOf(0) }
+
+    val coroutineScope = rememberCoroutineScope() //SnackBar 가 suspend 함수이기 때문에 코루틴 스코프를 사용해야 한다.
+
+//    val scaffoldState = rememberScaffoldState()
+
+    val snackbarHostState = remember { SnackbarHostState()}
+    val scaffoldState = rememberScaffoldState(
+        snackbarHostState = snackbarHostState
+    ) //이런식으로도 사용 가능
+    Scaffold(
+        scaffoldState = scaffoldState
+    ) {
+        Button(
+            onClick = {
+                counter++
+                coroutineScope.launch {
+                    val result = scaffoldState.snackbarHostState.showSnackbar(
+                        message = "Counter: $counter",
+                        actionLabel = "닫기",
+                        duration = SnackbarDuration.Short
+                    )
+//                    when (result) {
+//                        SnackbarResult.Dismissed -> {
+//                            counter--
+//                        }
+//                        SnackbarResult.ActionPerformed -> {
+//                            counter--
+//                        }
+//                    }
+                }
+            }
+        ) {
+            Text(text = "더하기")
         }
     }
 }
@@ -464,6 +508,7 @@ fun DefaultPreviewCh4() {
 //        CanvasEx()
 //        DialogEx()
 //        CustomDialogEx()
-        DropDownMenuEx()
+//        DropDownMenuEx()
+        SnackbarEx()
     }
 }
