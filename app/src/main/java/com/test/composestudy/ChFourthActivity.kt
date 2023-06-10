@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,9 +41,91 @@ class ChFourthActivity : ComponentActivity() {
 //                CustomDialogEx()
 //                DropDownMenuEx()
 //                SnackbarEx()
-                BottomAppBarEx()
+//                BottomAppBarEx()
+                PyeongToSquareMeterEx()
             }
         }
+    }
+}
+
+@Composable
+fun PyeongToSquareMeterEx() {
+    // 추 후에 ViewModel 로 State 를 관리할 수 있음
+    var pyeong by rememberSaveable{ mutableStateOf("23") }
+    var squareMeter by rememberSaveable { mutableStateOf((23 * 3.306).toString()) }
+
+    //State Hoisting
+    PyeongToSquareMeterStateless(
+        pyeong,
+        squareMeter,
+    ) {
+        if(it.isBlank()) { // 평이 비어있을 때
+            pyeong = ""
+            squareMeter = ""
+            return@PyeongToSquareMeterStateless
+        }
+        // Float 형태가 아닌 다른 값을 입력할 경우, 입력되지 못하게
+        val numbericValue = it.toFloatOrNull() ?: return@PyeongToSquareMeterStateless
+        pyeong = it
+        squareMeter = (numbericValue * 3.306).toString()
+    }
+
+//    Column (
+//        modifier = Modifier.padding(16.dp)
+//    ) {
+//        OutlinedTextField(
+//            value = pyeong,
+//            onValueChange = {
+//                if(it.isBlank()) { // 평이 비어있을 때
+//                    pyeong = ""
+//                    squareMeter = ""
+//                    return@OutlinedTextField
+//                }
+//                // Float 형태가 아닌 다른 값을 입력할 경우, 입력되지 못하게
+//                val numbericValue = it.toFloatOrNull() ?: return@OutlinedTextField
+//                pyeong = it
+//                squareMeter = (numbericValue * 3.306).toString()
+//            },
+//            label = {
+//                Text(text = "평")
+//            }
+//        )
+//        OutlinedTextField(
+//            value = squareMeter,
+//            onValueChange = {
+//                squareMeter = it
+//            },
+//            label = {
+//                Text(text = "제곱미터")
+//            }
+//        )
+//    }
+}
+
+// Ui 부분은 상태를 가지지 않음
+@Composable
+fun PyeongToSquareMeterStateless( // 상태에 대해서 절대 모름, 테스트에서 자유롭게 사용할 수 있음
+    pyeong : String,
+    squareMeter : String,
+    onPyeongChange : (String) -> Unit
+) {
+    Column (
+        modifier = Modifier.padding(16.dp)
+    ) {
+        OutlinedTextField(
+            value = pyeong,
+            onValueChange = onPyeongChange,
+            label = {
+                Text(text = "평")
+            }
+        )
+        OutlinedTextField(
+            value = squareMeter,
+            onValueChange = {},
+            label = {
+                Text(text = "제곱미터")
+            }
+        )
     }
 }
 
@@ -573,6 +656,7 @@ fun DefaultPreviewCh4() {
 //        CustomDialogEx()
 //        DropDownMenuEx()
 //        SnackbarEx()
-        BottomAppBarEx()
+//        BottomAppBarEx()
+        PyeongToSquareMeterEx()
     }
 }
