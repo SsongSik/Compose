@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -47,9 +49,140 @@ class ChFourthActivity : ComponentActivity() {
 //                SnackbarEx()
 //                BottomAppBarEx()
 //                PyeongToSquareMeterEx()
-                AnimationEx()
+//                AnimationEx()
+                AnimationEx2()
             }
         }
+    }
+}
+
+@Composable
+fun AnimationEx2() {
+    var isDarkMode by remember { mutableStateOf(false) }
+
+    val transition = updateTransition(targetState = isDarkMode, label = "다크모드 트랜지션")
+
+    //isDarkMode 에 따라 달라지는 애니메이션들 정의
+    val backgroundColor by transition.animateColor(label = "다크모드 배경색상 애니메이션") { state ->
+        when(state) {
+            true -> Color.Black
+            false -> Color.White
+        }
+    }
+
+    val color by transition.animateColor(label = "다크모드 글자 색상 애니메이션") {state ->
+        when(state) {
+            true -> Color.White
+            false -> Color.Black
+        }
+    }
+
+    val alpha by transition.animateFloat(label = "다크모드 알파 애니메이션") {state ->
+        when(state) {
+            true -> 1f
+            false -> 0.7f
+        }
+    }
+
+    Column (
+        modifier = Modifier
+            .background(backgroundColor)
+            .alpha(alpha)
+    ) {
+        RadioButtonWithText(
+            text = "일반모드",
+            color = color,
+            selected = !isDarkMode,
+        ) {
+            isDarkMode = false
+        }
+        RadioButtonWithText(
+            text = "다크모드",
+            color = color,
+            selected = isDarkMode,
+        ) {
+            isDarkMode = true
+        }
+
+        Crossfade(targetState = isDarkMode) {state ->
+            when(state) {
+                true -> {
+                    Row {
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Red)
+                                .size(20.dp)
+                        ) {
+                            Text("1")
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Magenta)
+                                .size(20.dp)
+                        ) {
+                            Text("2")
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Blue)
+                                .size(20.dp)
+                        ) {
+                            Text("3")
+                        }
+                    }
+                }
+                false -> {
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Red)
+                                .size(20.dp)
+                        ) {
+                            Text("1")
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Magenta)
+                                .size(20.dp)
+                        ) {
+                            Text("2")
+                        }
+                        Box(
+                            modifier = Modifier
+                                .background(Color.Blue)
+                                .size(20.dp)
+                        ) {
+                            Text("3")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun RadioButtonWithText(
+    text : String,
+    color : Color = Color.Black,
+    selected : Boolean,
+    onClick : () -> Unit
+) {
+    Row(
+        modifier = Modifier.selectable(
+            selected = selected,
+            onClick = onClick,
+        ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            selected = selected,
+            onClick = onClick,
+        )
+        Text(
+            text = text,
+            color = color
+        )
     }
 }
 
@@ -765,6 +898,7 @@ fun DefaultPreviewCh4() {
 //        SnackbarEx()
 //        BottomAppBarEx()
 //        PyeongToSquareMeterEx()
-        AnimationEx()
+//        AnimationEx()
+        AnimationEx2()
     }
 }
