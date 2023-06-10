@@ -7,11 +7,11 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
 import coil.compose.AsyncImage
-import com.test.composestudy.ProfileCardActivity.Companion.cardData
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class ChFourthActivity : ComponentActivity() {
@@ -35,9 +34,62 @@ class ChFourthActivity : ComponentActivity() {
 //                ConstraintSetEx()
 //                ConstraintLayoutEx2()
 //                CardEx(cardData)
-                CanvasEx()
+//                CanvasEx()
+                DialogEx()
             }
         }
+    }
+}
+
+@Composable
+fun DialogEx() {
+    var openDialog by remember { mutableStateOf(false) }
+    var counter by remember { mutableStateOf(0) }
+
+    Column(
+
+    ) {
+        Button(
+            onClick = {
+                openDialog = true
+            }
+        ) {
+            Text(text = "Show Dialog")
+        }
+        Text(text = "Counter: $counter")
+    }
+
+    if(openDialog) {
+        AlertDialog(
+            onDismissRequest = { // dialog 외부
+                openDialog = false
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        counter++
+                        openDialog = false
+                    }
+                ) {
+                    Text(text = "더하기")
+                }
+            },
+            dismissButton = {
+                Button(
+                    onClick = {
+                        openDialog = false
+                    }
+                ) {
+                    Text(text = "취소")
+                }
+            },
+            title = {
+                Text(text = "더하기")
+            },
+            text = {
+                Text(text = "더하기 버튼을 누르면 카운터를 증가합니다.\n버튼을 눌러주세요.")
+            }
+        )
     }
 }
 
@@ -160,9 +212,9 @@ fun ConstraintLayoutEx2() {
             modifier = Modifier
                 .width(100.dp)
                 .constrainAs(text) {
-                start.linkTo(barrier)
-                bottom.linkTo(magentaBox.bottom)
-            }
+                    start.linkTo(barrier)
+                    bottom.linkTo(magentaBox.bottom)
+                }
         )
 //        createHorizontalChain(redBox, magentaBox, greenBox, chainStyle = ChainStyle.SpreadInside)
 //        val barrier = createBottomBarrier(redBox, magentaBox, greenBox)
@@ -307,6 +359,7 @@ fun DefaultPreviewCh4() {
 //        ConstraintSetEx()
 //        ConstraintLayoutEx2()
 //        CardEx2(ProfileCardActivity.cardData)
-        CanvasEx()
+//        CanvasEx()
+        DialogEx()
     }
 }
