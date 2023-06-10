@@ -7,11 +7,9 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -21,6 +19,7 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.constraintlayout.compose.*
 import coil.compose.AsyncImage
 import com.test.composestudy.ui.theme.ComposestudyTheme
@@ -35,7 +34,70 @@ class ChFourthActivity : ComponentActivity() {
 //                ConstraintLayoutEx2()
 //                CardEx(cardData)
 //                CanvasEx()
-                DialogEx()
+//                DialogEx()
+                CustomDialogEx()
+            }
+        }
+    }
+}
+
+@Composable
+fun CustomDialogEx() {
+    var openDialog by remember { mutableStateOf(false) }
+    var counter by remember { mutableStateOf(0) }
+
+    Column(
+
+    ) {
+        Button(
+            onClick = {
+                openDialog = true
+            }
+        ) {
+            Text(text = "Show Dialog")
+        }
+        Text(text = "Counter: $counter")
+    }
+
+    if(openDialog) {
+        Dialog(
+            onDismissRequest = {
+                openDialog = false
+            },
+        ) {
+            Surface {
+                Column(
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Text(text = "버튼을 클릭해주세요.\n+1을 누르면 값이 증가합니다.\n-1을 누르면 값이 감소합니다.")
+                    Row(
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    ){
+                        Button(
+                            onClick = {
+                                openDialog = false
+                            }
+                        ) {
+                            Text(text = "취소")
+                        }
+                        Button(
+                            onClick = {
+                                counter++
+                                openDialog = false
+                            }
+                        ) {
+                            Text(text = "+1")
+                        }
+                        Button(
+                            onClick = {
+                                counter--
+                                openDialog = false
+                            }
+                        ) {
+                            Text(text = "-1")
+                        }
+                    }
+                }
             }
         }
     }
@@ -360,6 +422,7 @@ fun DefaultPreviewCh4() {
 //        ConstraintLayoutEx2()
 //        CardEx2(ProfileCardActivity.cardData)
 //        CanvasEx()
-        DialogEx()
+//        DialogEx()
+        CustomDialogEx()
     }
 }
