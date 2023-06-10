@@ -39,8 +39,71 @@ class ChFourthActivity : ComponentActivity() {
 //                DialogEx()
 //                CustomDialogEx()
 //                DropDownMenuEx()
-                SnackbarEx()
+//                SnackbarEx()
+                BottomAppBarEx()
             }
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun BottomAppBarEx() {
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+
+    var counter by remember { mutableStateOf(0) }
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        bottomBar = {
+            BottomAppBar(
+
+            ) {
+                Text(text = "BottomAppBar")
+                Button(onClick = {
+                    coroutineScope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = "Hello"
+                        )
+                    }
+                }) {
+                    Text(text = "Show Snackbar")
+                }
+                Button(
+                    onClick = {
+                        counter++
+                        coroutineScope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar(
+                                message = "Counter: $counter"
+                            )
+                        }
+                    }
+                ) {
+                    Text(text = "더하기")
+                }
+                Button(
+                    onClick = {
+                        counter--
+                        coroutineScope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar(
+                                message = "Counter: $counter"
+                            )
+                        }
+                    }
+                ) {
+                    Text(text = "빼기")
+                }
+            }
+        }
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(
+                text = "counter = ${counter}회입니다.",
+                modifier = Modifier.align(Alignment.Center)
+            )
         }
     }
 }
@@ -509,6 +572,7 @@ fun DefaultPreviewCh4() {
 //        DialogEx()
 //        CustomDialogEx()
 //        DropDownMenuEx()
-        SnackbarEx()
+//        SnackbarEx()
+        BottomAppBarEx()
     }
 }
