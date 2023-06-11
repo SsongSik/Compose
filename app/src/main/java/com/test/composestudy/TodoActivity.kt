@@ -37,11 +37,17 @@ class TodoActivity  : ComponentActivity() {
 fun TopLevel() {
     val (text, setText) = remember { mutableStateOf("") }
     val toDoList = remember { mutableStateListOf<ToDoData>() }
+    // MutableStateList 추가, 삭제, 변경 되었을 때만 Ui 갱신
 
     val onSubmit : (String) -> Unit = {text ->
         val key = (toDoList.lastOrNull()?.key ?: 0) + 1
         toDoList.add(ToDoData(key, text))
         setText("")
+    }
+
+    val onToggle : (Int, Boolean) -> Unit = { key, checked ->
+        val i = toDoList.indexOfFirst { it.key == key }
+        toDoList[i] = toDoList[i].copy( done = checked)
     }
 
     Scaffold {
@@ -53,7 +59,10 @@ fun TopLevel() {
             )
             LazyColumn{
                 items(toDoList) {toDoData ->
-                    ToDo(toDoData)
+                    ToDo(
+                        toDoData,
+                        onToggle = onToggle
+                    )
                 }
             }
         }
@@ -98,7 +107,8 @@ fun ToDo(
             when (it) {
                 false -> {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(8.dp)
                     ) {
                         Text(
                             modifier = Modifier.weight(1f),
@@ -132,7 +142,8 @@ fun ToDo(
                 }
                 true -> {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(8.dp)
                     ) {
                         OutlinedTextField(
                             value = toDoData.text,
@@ -178,6 +189,7 @@ fun ToDoPreview() {
     }
 }
 
+//값을 바꿀 수 없는 형태
 data class ToDoData(
     val key: Int,
     val text: String,
