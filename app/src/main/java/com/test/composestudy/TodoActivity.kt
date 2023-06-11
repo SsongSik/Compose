@@ -50,6 +50,16 @@ fun TopLevel() {
         toDoList[i] = toDoList[i].copy( done = checked)
     }
 
+    val onDelete : (Int) -> Unit = { key ->
+        val i = toDoList.indexOfFirst { it.key == key }
+        toDoList.removeAt(i)
+    }
+
+    val onEdit : (Int, String) -> Unit = { key, newText ->
+        val i = toDoList.indexOfFirst { it.key == key }
+        toDoList[i] = toDoList[i].copy( text = newText)
+    }
+
     Scaffold {
         Column {
             ToDoInput(
@@ -58,10 +68,12 @@ fun TopLevel() {
                 onSubmit = onSubmit
             )
             LazyColumn{
-                items(toDoList) {toDoData ->
+                items(toDoList, key = { it.key }) {toDoData ->
                     ToDo(
-                        toDoData,
-                        onToggle = onToggle
+                        toDoData = toDoData,
+                        onEdit = onEdit,
+                        onToggle = onToggle,
+                        onDelete = onDelete
                     )
                 }
             }
@@ -133,7 +145,7 @@ fun ToDo(
                         Spacer(modifier = Modifier.size(4.dp))
                         Button(
                             onClick = {
-
+                                onDelete(toDoData.key)
                             }
                         ) {
                             Text(text = "삭제")
@@ -145,16 +157,19 @@ fun ToDo(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(8.dp)
                     ) {
-                        OutlinedTextField(
-                            value = toDoData.text,
-                            onValueChange = {
+                        var (newText, setNewText) = remember { mutableStateOf(toDoData.text) }
 
-                            },
+                        OutlinedTextField(
+                            value = newText,
+                            onValueChange = setNewText,
                             modifier = Modifier.weight(1f)
                         )
                         Spacer(modifier = Modifier.size(4.dp))
                         Button(
-                            onClick = {}
+                            onClick = {
+                                onEdit(toDoData.key, newText)
+                                isEditing = false
+                            }
                         ) {
                             Text(text = "완료")
                         }
