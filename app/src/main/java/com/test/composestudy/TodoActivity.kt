@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class TodoActivity  : ComponentActivity() {
@@ -32,17 +34,16 @@ class TodoActivity  : ComponentActivity() {
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun TopLevel() {
-    val (text, setText) = remember { mutableStateOf("") }
-    val toDoList = remember { mutableStateListOf<ToDoData>() }
-    // MutableStateList 추가, 삭제, 변경 되었을 때만 Ui 갱신
+class ToDoViewModel : ViewModel() {
+    //viewModel에 상태를 분리하여 관리하여 remember를 사용하지 않아도 됨
+    val text = mutableStateOf("")
+    val toDoList = mutableStateListOf<ToDoData>()
 
-    val onSubmit : (String) -> Unit = {text ->
+    val onSubmit : (String) -> Unit = {it ->
         val key = (toDoList.lastOrNull()?.key ?: 0) + 1
-        toDoList.add(ToDoData(key, text))
-        setText("")
+        toDoList.add(ToDoData(key, it))
+        text.value = ""
+//        setText("")
     }
 
     val onToggle : (Int, Boolean) -> Unit = { key, checked ->
@@ -59,21 +60,53 @@ fun TopLevel() {
         val i = toDoList.indexOfFirst { it.key == key }
         toDoList[i] = toDoList[i].copy( text = newText)
     }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun TopLevel(viewModel : ToDoViewModel = viewModel()) {
+//    val (text, setText) = remember { mutableStateOf("") }
+//    val toDoList = remember { mutableStateListOf<ToDoData>() }
+    // MutableStateList 추가, 삭제, 변경 되었을 때만 Ui 갱신
+
+//    val onSubmit : (String) -> Unit = {text ->
+//        val key = (toDoList.lastOrNull()?.key ?: 0) + 1
+//        toDoList.add(ToDoData(key, text))
+//        viewModel.text.value = ""
+////        setText("")
+//    }
+//
+//    val onToggle : (Int, Boolean) -> Unit = { key, checked ->
+//        val i = toDoList.indexOfFirst { it.key == key }
+//        toDoList[i] = toDoList[i].copy( done = checked)
+//    }
+//
+//    val onDelete : (Int) -> Unit = { key ->
+//        val i = toDoList.indexOfFirst { it.key == key }
+//        toDoList.removeAt(i)
+//    }
+//
+//    val onEdit : (Int, String) -> Unit = { key, newText ->
+//        val i = toDoList.indexOfFirst { it.key == key }
+//        toDoList[i] = toDoList[i].copy( text = newText)
+//    }
 
     Scaffold {
         Column {
             ToDoInput(
-                text = text,
-                onTextChange = setText,
-                onSubmit = onSubmit
+                text = viewModel.text.value,
+                onTextChange = {
+                   viewModel.text.value = it
+                },
+                onSubmit = viewModel.onSubmit
             )
             LazyColumn{
-                items(toDoList, key = { it.key }) {toDoData ->
+                items(viewModel.toDoList, key = { it.key }) {toDoData ->
                     ToDo(
                         toDoData = toDoData,
-                        onEdit = onEdit,
-                        onToggle = onToggle,
-                        onDelete = onDelete
+                        onEdit = viewModel.onEdit,
+                        onToggle = viewModel.onToggle,
+                        onDelete = viewModel.onDelete
                     )
                 }
             }
