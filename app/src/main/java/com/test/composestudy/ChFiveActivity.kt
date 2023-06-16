@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -20,7 +21,12 @@ class ChFiveActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposestudyTheme {
-
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ){
+                    Greeting()
+                }
             }
         }
     }
@@ -31,7 +37,7 @@ val LocalElevation = compositionLocalOf { 8.dp }
 @Composable
 fun Greeting() {
     //암시적인 방법이기 때문에 예상하기 어려울 수 있음
-    CompositionLocalProvider(LocalElevation provides 12.dp) {
+//    CompositionLocalProvider(LocalElevation provides 12.dp) {
         Card(
             modifier = Modifier.padding(8.dp),
             elevation = LocalElevation.current
@@ -61,7 +67,7 @@ fun Greeting() {
                 }
             }
         }
-    }
+//    }
 }
 
 @Preview(showBackground = true)
