@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -17,9 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.test.composestudy.ui.theme.ComposestudyTheme
+import com.test.composestudy.viewmodel.GithubViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChFiveActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +36,29 @@ class ChFiveActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ){
 //                    Greeting()
-                    MyNav()
+//                    MyNav()
+                    ReposScreen()
                 }
             }
         }
     }
 }
 
+@Composable
+fun ReposScreen(viewModel: GithubViewModel = viewModel()) {
+    LazyColumn {
+        item {
+            Button(onClick = {
+                viewModel.getRepos()
+            }) {
+                Text("리포지토리 가져오기")
+            }
+        }
+        items(viewModel.repos) {
+            Text(it.name)
+        }
+    }
+}
 @Composable
 fun MyNav(
     modifier : Modifier = Modifier,
