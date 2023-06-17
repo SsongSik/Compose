@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.test.composestudy.service.GithubService
+import com.test.composestudy.service.PokeAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,10 +19,15 @@ import javax.inject.Singleton
 @Module
 class AppModules {
 
+//    @Singleton
+//    @Provides
+//    @Named("API_URI")
+//    fun provideWebAPI(): String = "https://api.github.com/"
+
     @Singleton
     @Provides
     @Named("API_URI")
-    fun provideWebAPI(): String = "https://api.github.com/"
+    fun provideWebAPI(): String = "https://pokeapi.co/api/v2/"
 
     // JSON <-> Kotlin Object 변환을 위한 Gson 객체 생성
     @Singleton
@@ -46,9 +52,15 @@ class AppModules {
         .addConverterFactory(converterFactory)
         .build()
 
+//    @Singleton
+//    @Provides
+//    fun provideGithubService(
+//        retrofit: Retrofit
+//    ): GithubService = retrofit.create(GithubService::class.java)
+
     @Singleton
     @Provides
     fun provideGithubService(
         retrofit: Retrofit
-    ): GithubService = retrofit.create(GithubService::class.java)
+    ): PokeAPI = retrofit.create(PokeAPI::class.java)
 }

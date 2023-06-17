@@ -22,7 +22,6 @@ import androidx.navigation.compose.composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.test.composestudy.ui.theme.ComposestudyTheme
-import com.test.composestudy.viewmodel.GithubViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,28 +36,28 @@ class ChFiveActivity : ComponentActivity() {
                 ){
 //                    Greeting()
 //                    MyNav()
-                    ReposScreen()
+//                    ReposScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun ReposScreen(viewModel: GithubViewModel = viewModel()) {
-    LazyColumn {
-        item {
-            Button(onClick = {
-                viewModel.getRepos()
-            }) {
-                Text("리포지토리 가져오기")
-            }
-        }
-        items(viewModel.repos) {
-            Text(it.name)
-        }
-    }
-}
+//@Composable
+//fun ReposScreen(viewModel: GithubViewModel = viewModel()) {
+//    LazyColumn {
+//        item {
+//            Button(onClick = {
+//                viewModel.getRepos()
+//            }) {
+//                Text("리포지토리 가져오기")
+//            }
+//        }
+//        items(viewModel.repos) {
+//            Text(it.name)
+//        }
+//    }
+//}
 @Composable
 fun MyNav(
     modifier : Modifier = Modifier,
