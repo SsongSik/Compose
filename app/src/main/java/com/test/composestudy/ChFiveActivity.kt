@@ -14,6 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.test.composestudy.ui.theme.ComposestudyTheme
 
 class ChFiveActivity : ComponentActivity() {
@@ -25,9 +29,130 @@ class ChFiveActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ){
-                    Greeting()
+//                    Greeting()
+                    MyNav()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MyNav(
+    modifier : Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
+) {
+    NavHost(navController, "Home", modifier = modifier) {
+        composable("Home") {
+            Column(
+
+            ) {
+                Text("Home")
+                Button(
+                    onClick = {
+                        navController.navigate("Playground") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Playground로 이동")
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("Office") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Office로 이동")
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("Home") {
+                            launchSingleTop = true
+                        }
+                    }
+                ) {
+                    Text(text = "Home로 이동")
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("Argument/1234"){
+                            launchSingleTop = true
+                        }
+                    }
+                ) {
+                    Text(text = "MYONGSIK로 이동")
+                }
+            }
+        }
+        composable("Office") {
+            Column(
+
+            ) {
+                Text("Office")
+                Button(
+                    onClick = {
+                        navController.navigate("Playground") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Playground으로 이동")
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("Home") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Home으로 이동")
+                }
+            }
+        }
+        composable("Playground") {
+            Column(
+
+            ) {
+                Text("Playground")
+                Button(
+                    onClick = {
+                        navController.navigate("Home") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Home으로 이동")
+                }
+                Button(
+                    onClick = {
+                        navController.navigate("Office") {
+                            popUpTo("Home") {
+                                inclusive = true
+                            }
+                        }
+                    }
+                ) {
+                    Text(text = "Office으로 이동")
+                }
+            }
+        }
+        composable(
+            "Argument/{userId}"
+        ) {
+            val userId = it.arguments?.get("userId")
+            Text("UserId : $userId")
         }
     }
 }
@@ -74,6 +199,7 @@ fun Greeting() {
 @Composable
 fun DefaultPreviewCh5() {
     ComposestudyTheme {
-        Greeting()
+//        Greeting()
+        MyNav()
     }
 }
