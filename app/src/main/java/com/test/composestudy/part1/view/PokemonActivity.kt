@@ -1,4 +1,4 @@
-package com.test.composestudy
+package com.test.composestudy.part1.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,8 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.test.composestudy.screen.DetailScreen
-import com.test.composestudy.screen.MainScreen
+import com.test.composestudy.part1.screen.DetailScreen
+import com.test.composestudy.part1.screen.MainScreen
 import com.test.composestudy.ui.theme.ComposestudyTheme
 import dagger.hilt.android.AndroidEntryPoint
 

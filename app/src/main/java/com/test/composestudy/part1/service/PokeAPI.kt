@@ -1,4 +1,4 @@
-package com.test.composestudy.service
+package com.test.composestudy.part1.service
 
 import retrofit2.http.GET
 import retrofit2.http.Path

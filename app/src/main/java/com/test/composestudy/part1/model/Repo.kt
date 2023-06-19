@@ -1,4 +1,4 @@
-package com.test.composestudy.model
+package com.test.composestudy.part1.model
 
 data class Repo(
     val id: Long,

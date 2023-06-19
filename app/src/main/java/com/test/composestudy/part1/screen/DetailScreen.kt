@@ -1,4 +1,4 @@
-package com.test.composestudy.screen
+package com.test.composestudy.part1.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.test.composestudy.viewmodel.PokemonViewModel
+import com.test.composestudy.part1.viewmodel.PokemonViewModel
 
 @Composable
 fun DetailScreen(

@@ -3,8 +3,7 @@ package com.test.composestudy.di
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.test.composestudy.service.GithubService
-import com.test.composestudy.service.PokeAPI
+import com.test.composestudy.part1.service.PokeAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

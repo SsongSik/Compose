@@ -1,4 +1,4 @@
-package com.test.composestudy.screen
+package com.test.composestudy.part1.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.test.composestudy.viewmodel.PokemonViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.test.composestudy.part1.viewmodel.PokemonViewModel
 
 @Composable
 fun MainScreen(

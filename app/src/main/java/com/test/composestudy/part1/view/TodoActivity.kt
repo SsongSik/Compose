@@ -1,4 +1,4 @@
-package com.test.composestudy
+package com.test.composestudy.part1.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle

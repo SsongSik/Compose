@@ -1,6 +1,6 @@
-package com.test.composestudy.service
+package com.test.composestudy.part1.service
 
-import com.test.composestudy.model.Repo
+import com.test.composestudy.part1.model.Repo
 import retrofit2.http.GET
 import retrofit2.http.Path
 

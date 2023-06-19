@@ -1,4 +1,4 @@
-package com.test.composestudy
+package com.test.composestudy.part1.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

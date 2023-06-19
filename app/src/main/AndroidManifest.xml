@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Composestudy"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".part1.view.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">
@@ -26,7 +26,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".ProfileCardActivity"
+            android:name=".part1.view.ProfileCardActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">
@@ -37,7 +37,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".ChFourthActivity"
+            android:name=".part1.view.ChFourthActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">
@@ -48,7 +48,7 @@
 <!--                </intent-filter>-->
         </activity>
         <activity
-            android:name=".TodoActivity"
+            android:name=".part1.view.TodoActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">
@@ -59,7 +59,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".ChFiveActivity"
+            android:name=".part1.view.ChFiveActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">
@@ -70,7 +70,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".PokemonActivity"
+            android:name=".part1.view.PokemonActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composestudy">

@@ -1,4 +1,4 @@
-package com.test.composestudy.viewmodel
+package com.test.composestudy.part1.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -7,9 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.test.composestudy.service.PokeAPI
-import com.test.composestudy.service.PokemonResponse
-import com.test.composestudy.service.Response
+import com.test.composestudy.part1.service.PokeAPI
+import com.test.composestudy.part1.service.PokemonResponse
+import com.test.composestudy.part1.service.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
