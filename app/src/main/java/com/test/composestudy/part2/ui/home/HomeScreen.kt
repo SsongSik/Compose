@@ -21,7 +21,7 @@ fun HomeScreen(homeState: HomeState) {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            val memoList = remember { memos }
+            val memoList = remember { memos.sortedBy { it.id }.toMutableStateList() }
             val onClickAction: (Int) -> Unit = {
                 homeState.showContent(
                     it
@@ -39,6 +39,7 @@ fun HomeScreen(homeState: HomeState) {
 @Composable
 fun AddMemo(memoList: SnapshotStateList<Memo>) {
     val inputValue = remember { mutableStateOf("") }
+    var count by remember { mutableStateOf(0) }
 
     Row(
         modifier = Modifier
@@ -60,12 +61,14 @@ fun AddMemo(memoList: SnapshotStateList<Memo>) {
                     Memo(memoList.size, inputValue.value)
                 )
                 inputValue.value = ""
+                count++
             },
             modifier = Modifier
                 .wrapContentWidth()
                 .fillMaxHeight()
         ) {
-            Text("ADD")
+            Text("ADD\n$count") //무한 루프 발생 -> 계속해서 Recomposition 발생
+//            count++ //Recomposition Test 이렇게 직접 쓰는 경우는 절대 안됨.
         }
     }
 }
@@ -78,6 +81,7 @@ fun ColumnScope.MemoList(onClickAction: (Int) -> Unit, memoList: SnapshotStateLi
             .weight(1f)
     ) {
         items(
+            //items 에 sortedBy 의 id가 들어갈 경우에는 계산의 수가 많아질 수 있다.
             items = memoList,
             key = { it.id }
         ) { memo ->
