@@ -25,14 +25,14 @@ class PokemonActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ){
-                    PokeTopLevel()
-                }
-            }
+//            ComposestudyTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ){
+//                    PokeTopLevel()
+//                }
+//            }
         }
     }
 }
@@ -85,7 +85,7 @@ fun PokeTopLevel(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreviewPokemon() {
-    ComposestudyTheme {
-
-    }
+//    ComposestudyTheme {
+//
+//    }
 }

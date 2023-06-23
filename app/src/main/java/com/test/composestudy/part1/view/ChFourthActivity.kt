@@ -42,7 +42,7 @@ class ChFourthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
+//            ComposestudyTheme {
 //                ConstraintLayoutEx()
 //                ConstraintSetEx()
 //                ConstraintLayoutEx2()
@@ -56,8 +56,8 @@ class ChFourthActivity : ComponentActivity() {
 //                PyeongToSquareMeterEx()
 //                AnimationEx()
 //                AnimationEx2()
-                EffectEx()
-            }
+//                EffectEx()
+//            }
         }
     }
 }
@@ -936,7 +936,7 @@ fun ConstraintLayoutEx() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreviewCh4() {
-    ComposestudyTheme {
+//    ComposestudyTheme {
 //        ConstraintLayoutEx()
 //        ConstraintSetEx()
 //        ConstraintLayoutEx2()
@@ -950,6 +950,6 @@ fun DefaultPreviewCh4() {
 //        PyeongToSquareMeterEx()
 //        AnimationEx()
 //        AnimationEx2()
-        EffectEx()
-    }
+//        EffectEx()
+//    }
 }

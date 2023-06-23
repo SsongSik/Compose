@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
+//            ComposestudyTheme {
 //                Greeting("World!")
 //                ButtonExample(onButtonClicked = {
 //                    Toast.makeText(this, "Send Clicked.", Toast.LENGTH_SHORT).show()
@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
 //                SlotEx()
 //                ScaffoldEx()
                 CatalogEx(items)
-            }
+//            }
         }
     }
 }
@@ -672,7 +672,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ComposestudyTheme {
+//    ComposestudyTheme {
 //        Greeting("Android")
 //        ButtonExample(onButtonClicked = { })
 //        ModifierEx()
@@ -687,5 +687,5 @@ fun DefaultPreview() {
 //        CoilEx()
 //        Greeting4()
 //        ScaffoldEx()
-    }
+//    }
 }

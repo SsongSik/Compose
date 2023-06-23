@@ -29,16 +29,16 @@ class ChFiveActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ){
-//                    Greeting()
-//                    MyNav()
-//                    ReposScreen()
-                }
-            }
+//            ComposestudyTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ){
+////                    Greeting()
+////                    MyNav()
+////                    ReposScreen()
+//                }
+//            }
         }
     }
 }
@@ -219,8 +219,8 @@ fun Greeting() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreviewCh5() {
-    ComposestudyTheme {
-//        Greeting()
-        MyNav()
-    }
+//    ComposestudyTheme {
+////        Greeting()
+//        MyNav()
+//    }
 }

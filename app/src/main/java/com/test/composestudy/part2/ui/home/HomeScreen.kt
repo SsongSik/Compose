@@ -16,24 +16,24 @@ import com.test.composestudy.part2.model.memos
 
 @Composable
 fun HomeScreen(homeState: HomeState) {
-    ComposestudyTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-            val memoList = remember { memos.sortedBy { it.id }.toMutableStateList() }
-            val onClickAction: (Int) -> Unit = {
-                homeState.showContent(
-                    it
-                )
-            }
-
-            Column {
-                AddMemo(memoList)
-                MemoList(onClickAction, memoList)
-            }
-        }
-    }
+//    ComposestudyTheme {
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = MaterialTheme.colors.background
+//        ) {
+//            val memoList = remember { memos.sortedBy { it.id }.toMutableStateList() }
+//            val onClickAction: (Int) -> Unit = {
+//                homeState.showContent(
+//                    it
+//                )
+//            }
+//
+//            Column {
+//                AddMemo(memoList)
+//                MemoList(onClickAction, memoList)
+//            }
+//        }
+//    }
 }
 
 @Composable

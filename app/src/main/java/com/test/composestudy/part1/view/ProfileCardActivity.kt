@@ -26,17 +26,17 @@ class ProfileCardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Column {
-                        CardEx(cardData)
-                        CardEx(cardData)
-                    }
-                }
-            }
+//            ComposestudyTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ) {
+//                    Column {
+//                        CardEx(cardData)
+//                        CardEx(cardData)
+//                    }
+//                }
+//            }
         }
     }
 
@@ -87,9 +87,9 @@ fun CardEx(cardData: CardData) {
 @Preview(showBackground = true)
 @Composable
 fun CardDefaultPreview() {
-    ComposestudyTheme {
-        CardEx(ProfileCardActivity.cardData)
-    }
+//    ComposestudyTheme {
+//        CardEx(ProfileCardActivity.cardData)
+//    }
 }
 
 data class CardData(

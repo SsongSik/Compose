@@ -25,14 +25,14 @@ class TodoActivity  : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposestudyTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    TopLevel()
-                }
-            }
+//            ComposestudyTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ) {
+//                    TopLevel()
+//                }
+//            }
         }
     }
 }
@@ -238,25 +238,25 @@ fun ToDo(
 @Preview(showBackground = true)
 @Composable
 fun ToDoInputPreview() {
-    ComposestudyTheme {
-        ToDoInput("테스트", {}, {})
-    }
+//    ComposestudyTheme {
+//        ToDoInput("테스트", {}, {})
+//    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultTodoPreview() {
-    ComposestudyTheme {
-        TopLevel()
-    }
+//    ComposestudyTheme {
+//        TopLevel()
+//    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ToDoPreview() {
-    ComposestudyTheme {
-        ToDo(ToDoData(1, "nice", true))
-    }
+//    ComposestudyTheme {
+//        ToDo(ToDoData(1, "nice", true))
+//    }
 }
 
 //값을 바꿀 수 없는 형태
