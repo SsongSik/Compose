@@ -13,7 +13,9 @@ private val LocalColors = staticCompositionLocalOf { ColorSet.Red.LightColors }
 
 @Composable
 fun ComposestudyTheme(
-    myColors: ColorSet,
+    myColors: ColorSet = ColorSet.Red,
+    typography: androidx.compose.material.Typography = Typography,
+    shapes: androidx.compose.material.Shapes = Shapes,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -26,8 +28,8 @@ fun ComposestudyTheme(
     CompositionLocalProvider(LocalColors provides myColors.LightColors) {
         MaterialTheme(
             colors = colors.material,
-            typography = Typography,
-            shapes = Shapes,
+            typography = typography,
+            shapes = shapes,
             content = content
         )
     }
