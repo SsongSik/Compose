@@ -38,7 +38,7 @@ sealed class ColorSet {
                 background = White,
                 onBackground = Black,
                 error = Red400,
-                onPrimary = White
+                onPrimary = White,
             ),
             success = Green400,
             disabledSecondary = Grey200,
