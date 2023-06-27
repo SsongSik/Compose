@@ -48,9 +48,6 @@ fun MovieItem() {
                     .padding(Paddings.small)
                     .size(ICON_SIZE),
                 imageVector = ImageVector.vectorResource(id = com.test.composestudy.R.drawable.baseline_star_rate_24),
-//                tint = Color.Black.copy(
-//                    alpha = 0.5f
-//                ),
                 contentDescription = "rating icon"
             )
             Text(

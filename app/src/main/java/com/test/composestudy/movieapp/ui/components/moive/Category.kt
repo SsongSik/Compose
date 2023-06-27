@@ -11,30 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.test.composestudy.ui.theme.ComposestudyTheme
 import com.test.composestudy.ui.theme.Paddings
-import java.util.Locale.Category
 
 
 @Composable
 fun CategoryRow() {
-    Column(
-
-    ) {
+    Column{
         CategoryTitle("Action")
         LazyRow(
             contentPadding = PaddingValues(
                 horizontal = Paddings.large
             )
         ) {
-//            itemsIndexed
-            item {
-                MovieItem()
-            }
-            item {
-                MovieItem()
-            }
-            item {
-                MovieItem()
-            }
             item {
                 MovieItem()
             }
