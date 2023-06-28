@@ -1,4 +1,4 @@
-package com.test.composestudy.movieapp.ui.components.moive.button
+package com.test.composestudy.movieapp.ui.components.button
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import com.test.composestudy.ui.theme.Paddings
 import com.test.composestudy.ui.theme.colorsScheme
 
 @Composable
-fun PrimaryButton(
+fun SecondaryButton(
     modifier: Modifier = Modifier,
     @StringRes id: Int? = null,
     text: String = "",
@@ -27,8 +27,8 @@ fun PrimaryButton(
         shape = MaterialTheme.shapes.large,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colorsScheme.primary,
-            contentColor = MaterialTheme.colorsScheme.onPrimary,
+            backgroundColor = MaterialTheme.colorsScheme.background,
+            contentColor = MaterialTheme.colorsScheme.secondary,
             disabledBackgroundColor = MaterialTheme.colorsScheme.disabledSecondary,
             disabledContentColor = MaterialTheme.colorsScheme.background,
         )
@@ -48,10 +48,10 @@ fun PrimaryButton(
 
 @Preview
 @Composable
-fun PrimaryButtonPreview() {
+fun SecondaryButtonPreview() {
     ComposestudyTheme() {
-        PrimaryButton(
-            text = "SUBMIT"
+        SecondaryButton(
+            text = "CANCEL"
         ) {
 
         }
