@@ -31,7 +31,8 @@ fun SecondaryButton(
             contentColor = MaterialTheme.colorsScheme.secondary,
             disabledBackgroundColor = MaterialTheme.colorsScheme.disabledSecondary,
             disabledContentColor = MaterialTheme.colorsScheme.background,
-        )
+        ),
+        elevation = null
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
