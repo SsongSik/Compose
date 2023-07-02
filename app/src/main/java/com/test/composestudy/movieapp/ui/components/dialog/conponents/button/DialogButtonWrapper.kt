@@ -62,5 +62,6 @@ fun DialogButtonColumn(
                 }
             }
         }
+        Spacer(modifier = Modifier.height(Paddings.large))
     }
 }

@@ -9,12 +9,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import com.test.composestudy.movieapp.ui.components.dialog.conponents.button.DialogButtonColumn
 import com.test.composestudy.movieapp.ui.components.dialog.conponents.content.DialogContentWrapper
 import com.test.composestudy.movieapp.ui.components.dialog.conponents.title.DialogTitleWrapper
 import com.test.composestudy.movieapp.ui.model.dialog.DialogButton
 import com.test.composestudy.movieapp.ui.model.dialog.DialogContent
+import com.test.composestudy.movieapp.ui.model.dialog.DialogText
 import com.test.composestudy.movieapp.ui.model.dialog.DialogTitle
+import com.test.composestudy.ui.theme.ComposestudyTheme
 import com.test.composestudy.ui.theme.Paddings
 import com.test.composestudy.ui.theme.colorsScheme
 
@@ -55,5 +58,58 @@ fun BaseDialogPopup(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun BaseDialogPopupPreView() {
+    ComposestudyTheme() {
+        BaseDialogPopup(
+            dialogTitle = DialogTitle.Header("Title"),
+            dialogContent = DialogContent.Large(
+                DialogText.Default("abced abced abced abced abced abced abced")
+            ),
+            button = listOf(
+                DialogButton.Primary("Ok")
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+fun BaseDialogLargePopupPreView() {
+    ComposestudyTheme() {
+        BaseDialogPopup(
+            dialogTitle = DialogTitle.Large("Title"),
+            dialogContent = DialogContent.Large(
+                DialogText.Default("abced abced abced abced abced abced abced")
+            ),
+            button = listOf(
+                DialogButton.Secondary("Okay"),
+                DialogButton.UnderlinedText("Cancel"),
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+fun BaseDialogRatingPopupPreView() {
+    ComposestudyTheme() {
+        BaseDialogPopup(
+            dialogTitle = DialogTitle.Large("Title"),
+            dialogContent = DialogContent.Rating(
+                DialogText.Rating(
+                    text = "범죄도시3",
+                    rating = 8.2f
+                )
+            ),
+            button = listOf(
+                DialogButton.Primary("Okay"),
+                DialogButton.Secondary("Cancel"),
+            )
+        )
     }
 }
